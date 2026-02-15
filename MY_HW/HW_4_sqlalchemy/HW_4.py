@@ -81,13 +81,6 @@ session.add_all([Products(name='Smartphone', price=299.99, is_stock=True, catego
                  ])
 session.commit()
 
-# all_categories = (
-#     select(Category)
-#     .join(Products)
-# )
-#
-# response = session.execute(all_categories).scalars()
-
 stmt = select(Category).options(selectinload(Category.products))
 categories = session.scalars(stmt).all()
 
@@ -120,7 +113,6 @@ for name, count in result:
     print(f"{name}: {count}")
 
 session.commit()
-
 
 stmt = (
     select(
